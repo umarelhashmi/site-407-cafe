@@ -48,18 +48,46 @@
     });
   });
 
-  // Hero panel click -> scroll to category in menu ledger
+  // Hero panel click -> scroll directly to the exact menu item in the ledger
+  function scrollToHeroMenuItem(panel) {
+    const targetCat = panel.getAttribute("data-target-category");
+    const targetItem = panel.getAttribute("data-target-item");
+    if (!targetCat) return;
+
+    if (searchQuery) {
+      handleSearchInput("");
+    }
+    if (activeCategoryId !== "all") {
+      selectCategory("all");
+    }
+
+    requestAnimationFrame(() => {
+      const itemEl =
+        (targetItem && document.getElementById("item-" + targetCat + "-" + targetItem)) ||
+        (targetItem &&
+          document.querySelector(
+            '.ledger-item[data-cat-id="' + targetCat + '"][data-item-id="' + targetItem + '"]'
+          )) ||
+        document.getElementById("cat-" + targetCat);
+
+      if (itemEl) {
+        document.querySelectorAll(".ledger-item.is-highlighted-item").forEach((el) => {
+          el.classList.remove("is-highlighted-item");
+        });
+        if (itemEl.classList.contains("ledger-item")) {
+          itemEl.classList.add("is-highlighted-item");
+        }
+        itemEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  }
+
   panels.forEach((panel) => {
-    panel.addEventListener("click", () => {
-      const targetCat = panel.getAttribute("data-target-category");
-      if (targetCat) {
-        selectCategory("all");
-        setTimeout(() => {
-          const el = document.getElementById("cat-" + targetCat);
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 40);
+    panel.addEventListener("click", () => scrollToHeroMenuItem(panel));
+    panel.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        scrollToHeroMenuItem(panel);
       }
     });
   });
@@ -226,7 +254,7 @@
               : "";
 
             return `
-              <article class="ledger-item ${hasPhoto ? "has-photo" : "no-photo"}" data-cat-id="${escapeAttr(cat.id)}" data-item-id="${escapeAttr(item.id)}">
+              <article id="item-${escapeAttr(cat.id)}-${escapeAttr(item.id)}" class="ledger-item ${hasPhoto ? "has-photo" : "no-photo"}" data-cat-id="${escapeAttr(cat.id)}" data-item-id="${escapeAttr(item.id)}">
                 ${thumbHtml}
                 <div class="ledger-body">
                   <div class="ledger-headline">
