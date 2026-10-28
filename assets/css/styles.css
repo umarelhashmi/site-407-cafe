@@ -1,0 +1,1585 @@
+/* ==========================================================================
+   407 CAFE — ORIGINAL EUROPEAN CREPERIE, GELATERIA & ESPRESSO LEDGER
+   Design System: Triptych First-View Stage + Asymmetric Counter Ticket & Ledger
+   ========================================================================== */
+
+:root {
+  /* Core Palette (5 Named Hex Values from Design Plan) */
+  --espresso-ink: #14110F;
+  --espresso-deep: #1E1916;
+  --steamed-milk: #FAF6F0;
+  --toasted-crepe: #EFE7DA;
+  --crepe-border: #DED2BF;
+  --roasted-hazelnut: #A85828;
+  --hazelnut-bright: #C86D35;
+  --pistachio-crema: #4A6B46;
+  --muted-cocoa: #65584F;
+  --cream-text: #F7F2EA;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Measurements */
+  --top-stage-bar: 92px;
+  --max-stage: 1480px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--espresso-ink);
+  color: var(--espresso-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--steamed-milk);
+  color: var(--espresso-ink);
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--roasted-hazelnut);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   1. FIRST VIEW: 100dvh TRIPTYCH STAGE (Text Above + 3 Macro Menu Photos)
+   ========================================================================== */
+
+.first-view-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 580px;
+  max-height: 1200px;
+  background-color: var(--espresso-ink);
+  color: var(--cream-text);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border-bottom: 3px solid var(--espresso-ink);
+}
+
+/* Top Stage Bar (Text ABOVE the 3 split images so nothing obstructs the food) */
+.triptych-top-bar {
+  position: relative;
+  z-index: 20;
+  background-color: var(--espresso-ink);
+  border-bottom: 2px solid rgba(247, 242, 234, 0.14);
+  padding: 10px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo-emblem {
+  width: 78px;
+  height: 63px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.brand-lockup:hover .brand-logo-emblem {
+  transform: scale(1.03);
+}
+
+.brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: #FFFFFF;
+}
+
+.brand-location-line {
+  font-size: 0.78rem;
+  color: rgba(247, 242, 234, 0.78);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.brand-location-line a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+/* Center Headline Above the 3 Split Photos */
+.triptych-headline-zone {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.triptych-triad {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 2.05rem);
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.triptych-subnote {
+  font-size: 0.78rem;
+  color: rgba(247, 242, 234, 0.75);
+}
+
+/* Right Action Cluster in Top Bar */
+.triptych-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stage-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 4px;
+}
+
+.stage-nav-link {
+  padding: 7px 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(247, 242, 234, 0.86);
+  border-radius: 999px;
+  border: 1px solid rgba(247, 242, 234, 0.16);
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.stage-nav-link:hover {
+  background-color: rgba(247, 242, 234, 0.12);
+  color: #FFFFFF;
+  border-color: rgba(247, 242, 234, 0.35);
+}
+
+.btn-order-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--roasted-hazelnut);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  transition: background-color 0.18s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-order-primary:hover {
+  background-color: var(--hazelnut-bright);
+  transform: translateY(-1px);
+}
+
+/* The 3 Vertical Macro Split Panels */
+.triptych-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  background-color: var(--espresso-ink);
+}
+
+.triptych-panel {
+  position: relative;
+  flex: 1 1 33.333%;
+  height: 100%;
+  overflow: hidden;
+  border-right: 2px solid var(--espresso-ink);
+  transition: flex 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  display: block;
+}
+
+.triptych-panel:last-child {
+  border-right: none;
+}
+
+@media (min-width: 769px) {
+  .triptych-grid:hover .triptych-panel {
+    flex: 0.92 1 30%;
+  }
+  .triptych-grid .triptych-panel:hover {
+    flex: 1.28 1 40%;
+  }
+}
+
+.triptych-panel picture,
+.triptych-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 769px) {
+  .triptych-panel:hover img {
+    transform: scale(1.035);
+  }
+}
+
+/* Subtle bottom vignette ONLY at the bottom 18% so the food center stays 100% clear */
+.triptych-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 26%;
+  background: linear-gradient(to top, rgba(16, 12, 10, 0.82) 0%, rgba(16, 12, 10, 0.32) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.panel-menu-tag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.panel-dish-info {
+  background: rgba(20, 17, 15, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(247, 242, 234, 0.22);
+  padding: 8px 13px;
+  border-radius: 12px 4px 12px 4px;
+  max-width: 100%;
+}
+
+.panel-dish-category {
+  display: block;
+  font-size: 0.68rem;
+  color: rgba(247, 242, 234, 0.72);
+  margin-bottom: 1px;
+}
+
+.panel-dish-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.panel-dish-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.1;
+}
+
+.panel-dish-price {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #F6B98E;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel-dish-desc {
+  font-size: 0.73rem;
+  color: rgba(247, 242, 234, 0.82);
+  margin-top: 2px;
+}
+
+/* Mobile Slideshow Controls (Visible only on mobile < 768px) */
+.mobile-hero-hud {
+  display: none;
+}
+
+/* ==========================================================================
+   2. OVAL MEDALLION TASTING RIBBON ("Most Ordered" Strip)
+   ========================================================================== */
+
+.oval-tasting-ribbon {
+  background-color: var(--espresso-deep);
+  color: var(--cream-text);
+  border-bottom: 2px solid var(--espresso-ink);
+  padding: 14px 20px;
+}
+
+.ribbon-inner {
+  max-width: var(--max-stage);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.ribbon-badge-label {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  border-right: 1px dashed rgba(247, 242, 234, 0.25);
+}
+
+.ribbon-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.05;
+}
+
+.ribbon-sub {
+  font-size: 0.72rem;
+  color: rgba(247, 242, 234, 0.7);
+}
+
+.ribbon-track {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(247, 242, 234, 0.3) transparent;
+}
+
+.ribbon-track::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ribbon-track::-webkit-scrollbar-thumb {
+  background: rgba(247, 242, 234, 0.3);
+  border-radius: 99px;
+}
+
+/* Oval Medallion Pill (Echoes the oval 407 Cafe logo) */
+.medallion-pill {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(247, 242, 234, 0.16);
+  border-radius: 999px;
+  padding: 5px 14px 5px 5px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
+  text-align: left;
+  color: var(--cream-text);
+}
+
+.medallion-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(247, 242, 234, 0.4);
+  transform: translateY(-1px);
+}
+
+.medallion-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+  flex-shrink: 0;
+  background-color: var(--espresso-ink);
+}
+
+.medallion-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.medallion-callout {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #A9D8A4;
+}
+
+.medallion-name {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+.medallion-price {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #F6B98E;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   3. ASYMMETRIC CAFE COUNTER WORKSPACE (Left Ticket & Index + Right Ledger)
+   ========================================================================== */
+
+.counter-workspace {
+  max-width: var(--max-stage);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  align-items: start;
+  gap: 28px;
+  padding: 28px 24px 56px;
+}
+
+/* Left Architectural Counter Rail */
+.counter-rail {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* Notched Café Receipt Ticket */
+.cafe-receipt-ticket {
+  position: relative;
+  background-color: var(--toasted-crepe);
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 6px;
+  padding: 18px 16px;
+  box-shadow: 4px 4px 0 var(--espresso-ink);
+}
+
+/* Ticket semicircular side notches */
+.cafe-receipt-ticket::before,
+.cafe-receipt-ticket::after {
+  content: "";
+  position: absolute;
+  top: 76px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--steamed-milk);
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 50%;
+}
+
+.cafe-receipt-ticket::before {
+  left: -8px;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.cafe-receipt-ticket::after {
+  right: -8px;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.ticket-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px dashed rgba(20, 17, 15, 0.3);
+}
+
+.ticket-logo {
+  width: 64px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.ticket-title-group h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.ticket-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--pistachio-crema);
+  margin-top: 3px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--pistachio-crema);
+}
+
+.ticket-details {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.81rem;
+}
+
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.ticket-label {
+  color: var(--muted-cocoa);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.ticket-val {
+  font-weight: 600;
+  text-align: right;
+}
+
+.ticket-val a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ticket-hours-block {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--crepe-border);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 0.76rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ticket-cta-stack {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.btn-ticket-order {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--espresso-ink);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  border-radius: 4px;
+  transition: background-color 0.18s ease;
+}
+
+.btn-ticket-order:hover {
+  background-color: var(--roasted-hazelnut);
+}
+
+.ticket-sublinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.btn-ticket-sub {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: #FFFFFF;
+  border: 1px solid var(--espresso-ink);
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-ticket-sub:hover {
+  background-color: var(--steamed-milk);
+}
+
+/* Search & Category Index Box */
+.category-index-panel {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 6px;
+  padding: 14px;
+  box-shadow: 4px 4px 0 var(--espresso-ink);
+}
+
+.menu-search-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.menu-search-input {
+  width: 100%;
+  padding: 9px 32px 9px 12px;
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 4px;
+  background-color: var(--steamed-milk);
+  font-size: 0.83rem;
+  color: var(--espresso-ink);
+}
+
+.menu-search-input::placeholder {
+  color: var(--muted-cocoa);
+}
+
+.menu-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted-cocoa);
+  cursor: pointer;
+  font-size: 1rem;
+  display: none;
+}
+
+.category-index-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cat-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--espresso-ink);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cat-nav-btn:hover {
+  background-color: var(--toasted-crepe);
+}
+
+.cat-nav-btn.is-active {
+  background-color: var(--espresso-ink);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.cat-count-pill {
+  font-size: 0.71rem;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background-color: rgba(20, 17, 15, 0.08);
+  font-variant-numeric: tabular-nums;
+}
+
+.cat-nav-btn.is-active .cat-count-pill {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   4. RIGHT MAIN MENU STAGE — COMPACT CAFE LEDGER (Zero Giant Images!)
+   ========================================================================== */
+
+.menu-ledger-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+/* Mobile Sticky Category Strip (Hidden on Desktop, Shown on Mobile) */
+.mobile-category-bar {
+  display: none;
+}
+
+.category-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 8px;
+  padding: 20px 22px;
+  box-shadow: 4px 4px 0 var(--espresso-ink);
+}
+
+.category-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--espresso-ink);
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 1.95rem);
+  font-weight: 700;
+  color: var(--espresso-ink);
+  line-height: 1.1;
+}
+
+.category-item-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted-cocoa);
+  white-space: nowrap;
+}
+
+/* 2-Column Ledger Grid on Desktop, 1-Column Compact Rows on Mobile */
+.ledger-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 22px;
+}
+
+/* Individual Compact Ledger Row (Never tall, never blocks screen!) */
+.ledger-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--crepe-border);
+  background-color: var(--steamed-milk);
+  transition: border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.ledger-item:hover {
+  border-color: var(--espresso-ink);
+  background-color: var(--toasted-crepe);
+}
+
+.ledger-item.has-photo {
+  cursor: pointer;
+}
+
+/* Compact Chamfered-Leaf Thumbnail (84x84 desktop, 70x70 mobile) */
+.ledger-thumb-wrap {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+  border-radius: 14px 4px 14px 4px;
+  overflow: hidden;
+  border: 1.5px solid var(--espresso-ink);
+  background-color: var(--toasted-crepe);
+}
+
+.ledger-thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.ledger-item.has-photo:hover .ledger-thumb-wrap img {
+  transform: scale(1.06);
+}
+
+.ledger-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ledger-headline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ledger-name {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--espresso-ink);
+  line-height: 1.15;
+}
+
+.ledger-leader {
+  flex: 1;
+  border-bottom: 1px dotted rgba(20, 17, 15, 0.3);
+  min-width: 12px;
+  position: relative;
+  top: -4px;
+}
+
+.ledger-price {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--roasted-hazelnut);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ledger-desc {
+  font-size: 0.78rem;
+  color: var(--muted-cocoa);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ledger-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.badge-bestseller {
+  font-size: 0.67rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: var(--pistachio-crema);
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+
+.badge-rating {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--espresso-ink);
+  background-color: rgba(20, 17, 15, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   5. GUEST REVIEWS & ORIGINAL STOREFRONT FILMSTRIP
+   ========================================================================== */
+
+.reviews-counter-section {
+  background-color: var(--toasted-crepe);
+  border-top: 2px solid var(--espresso-ink);
+  border-bottom: 2px solid var(--espresso-ink);
+  padding: 40px 24px;
+}
+
+.reviews-inner {
+  max-width: var(--max-stage);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.reviews-top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--espresso-ink);
+}
+
+.reviews-heading-block h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.rating-pills-cluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rating-stat-pill {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 2px 2px 0 var(--espresso-ink);
+}
+
+.star-gold {
+  color: #D9822B;
+}
+
+/* Compact Original Photos Filmstrip (Never full-screen!) */
+.original-photos-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.strip-photo-btn {
+  flex: 0 0 auto;
+  width: 175px;
+  height: 118px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid var(--espresso-ink);
+  background-color: var(--espresso-ink);
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+.strip-photo-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.strip-photo-btn:hover img {
+  transform: scale(1.05);
+}
+
+.strip-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(20, 17, 15, 0.78);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  padding: 3px 7px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Highlighted Google Maps Snippets Row */
+.gmaps-snippets-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.gmaps-snippet-chip {
+  background-color: var(--espresso-ink);
+  color: var(--cream-text);
+  padding: 11px 14px;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.3;
+}
+
+/* Customer Review Cards Grid */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.review-ticket {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--espresso-ink);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 3px 3px 0 var(--espresso-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.review-quote {
+  font-size: 0.83rem;
+  color: var(--espresso-ink);
+  line-height: 1.45;
+}
+
+.review-author-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--crepe-border);
+  font-size: 0.76rem;
+}
+
+.review-author-name {
+  font-weight: 700;
+}
+
+.review-author-meta {
+  color: var(--muted-cocoa);
+  font-size: 0.71rem;
+}
+
+/* ==========================================================================
+   6. STOREFRONT, ABOUT AMENITIES & CONTACT FOOTER LEDGER
+   ========================================================================== */
+
+.storefront-footer {
+  background-color: var(--espresso-ink);
+  color: var(--cream-text);
+  padding: 44px 24px 36px;
+}
+
+.footer-inner {
+  max-width: var(--max-stage);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-logo {
+  width: 112px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.footer-exact-desc {
+  font-size: 0.85rem;
+  color: rgba(247, 242, 234, 0.82);
+  max-width: 46ch;
+}
+
+.amenities-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.amenity-tag {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(247, 242, 234, 0.18);
+  color: rgba(247, 242, 234, 0.9);
+}
+
+.footer-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(247, 242, 234, 0.18);
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  border-bottom: 1px dashed rgba(247, 242, 234, 0.22);
+  padding-bottom: 6px;
+}
+
+.store-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.83rem;
+}
+
+.store-contact-list a {
+  color: #F6B98E;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.storefront-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.storefront-mini-img {
+  width: 74px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  flex-shrink: 0;
+}
+
+.social-links-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(247, 242, 234, 0.25);
+  font-size: 0.81rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  transition: background-color 0.18s ease;
+}
+
+.social-pill:hover {
+  background-color: var(--roasted-hazelnut);
+}
+
+.footer-bottom-bar {
+  padding-top: 18px;
+  border-top: 1px solid rgba(247, 242, 234, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.76rem;
+  color: rgba(247, 242, 234, 0.65);
+}
+
+/* ==========================================================================
+   7. DISH PHOTO LIGHTBOX MODAL
+   ========================================================================== */
+
+.dish-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(15, 12, 10, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.dish-modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dish-modal-card {
+  background-color: var(--steamed-milk);
+  color: var(--espresso-ink);
+  border: 2px solid var(--espresso-ink);
+  border-radius: 10px;
+  max-width: 540px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.dish-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--espresso-ink);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.dish-modal-img-wrap {
+  width: 100%;
+  height: 290px;
+  background-color: var(--espresso-ink);
+}
+
+.dish-modal-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dish-modal-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dish-modal-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dish-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.dish-modal-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--roasted-hazelnut);
+}
+
+.dish-modal-desc {
+  font-size: 0.86rem;
+  color: var(--muted-cocoa);
+}
+
+/* ==========================================================================
+   8. NATIVE MOBILE LAYOUT (< 768px)
+   - First view: 1 photo at a time, crossfading every 2.0 seconds in a loop
+   - Below first view: Compact thumbnails ONLY, never hogging the viewport!
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .counter-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 18px 14px 40px;
+  }
+
+  .counter-rail {
+    position: static;
+    max-height: none;
+    min-width: 0;
+  }
+
+  .category-index-panel {
+    display: none;
+  }
+
+  .mobile-category-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background-color: var(--steamed-milk);
+    padding: 10px 0;
+    border-bottom: 2px solid var(--espresso-ink);
+  }
+
+  .mobile-cat-scroll {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .mobile-cat-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-cat-chip {
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1.5px solid var(--espresso-ink);
+    background-color: #FFFFFF;
+    color: var(--espresso-ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .mobile-cat-chip.is-active {
+    background-color: var(--espresso-ink);
+    color: #FFFFFF;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-grid,
+  .gmaps-snippets-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .first-view-stage {
+    min-height: 540px;
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .triptych-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .brand-logo-emblem {
+    width: 54px;
+    height: 44px;
+  }
+
+  .brand-name {
+    font-size: 1.18rem;
+  }
+
+  .brand-addr-short,
+  .brand-sep {
+    display: none;
+  }
+
+  .brand-location-line {
+    font-size: 0.74rem;
+  }
+
+  .triptych-headline-zone {
+    display: none;
+  }
+
+  .stage-nav-links {
+    display: none;
+  }
+
+  .btn-order-primary {
+    padding: 8px 13px;
+    font-size: 0.78rem;
+  }
+
+  /* Mobile Headline Strip right above the crossfading photo */
+  .mobile-stage-subbar {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--espresso-deep);
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border-bottom: 1px solid rgba(247, 242, 234, 0.14);
+  }
+
+  /* Single-Photo 2-Second Crossfade Loop on Mobile */
+  .triptych-grid {
+    position: relative;
+    display: block;
+  }
+
+  .triptych-panel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-right: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.65s ease-in-out;
+  }
+
+  .triptych-panel.is-mobile-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .panel-menu-tag {
+    bottom: 58px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .mobile-hero-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 10;
+  }
+
+  .mobile-slide-dots {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(20, 17, 15, 0.75);
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(247, 242, 234, 0.22);
+  }
+
+  .mobile-slide-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(247, 242, 234, 0.35);
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .mobile-slide-dot.is-active {
+    background: #F6B98E;
+    transform: scale(1.25);
+  }
+
+  .mobile-jump-menu-btn {
+    background: var(--espresso-ink);
+    color: #FFFFFF;
+    border: 1px solid rgba(247, 242, 234, 0.35);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  /* Compact Menu Ledger on Mobile: 1 column, 68x68px thumbnails so 5-6 items fit per screen */
+  .ledger-items-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .category-section {
+    padding: 14px 12px;
+  }
+
+  .ledger-item {
+    padding: 7px 8px;
+    gap: 10px;
+  }
+
+  .ledger-thumb-wrap {
+    width: 68px;
+    height: 68px;
+    border-radius: 10px 3px 10px 3px;
+  }
+
+  .ledger-name {
+    font-size: 1.02rem;
+  }
+
+  .ledger-price {
+    font-size: 0.88rem;
+  }
+
+  .ledger-desc {
+    font-size: 0.74rem;
+  }
+
+  .medallion-thumb {
+    width: 46px;
+    height: 46px;
+  }
+
+  .strip-photo-btn {
+    width: 145px;
+    height: 98px;
+  }
+}
+
+.mobile-stage-subbar {
+  display: none;
+}
